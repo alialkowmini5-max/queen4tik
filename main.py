@@ -36,7 +36,7 @@ def process(file: UploadFile = File(...)):
         run(["ffmpeg","-y","-itsscale","2","-i",str(in_path),
              "-c:v","copy","-c:a","copy","-movflags","+faststart",str(out_path)])
         return FileResponse(str(out_path), media_type="video/mp4",
-                            headers={"Content-Disposition": 'attachment; filename="output_itsscale2.mp4"'})
+                            headers={"Content-Disposition": 'attachment; filename="output_4tik.mp4"'})
     except Exception as e:
         return {"error": str(e)}
     finally:

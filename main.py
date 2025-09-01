@@ -1,16 +1,18 @@
 import os, uuid, shutil, subprocess
 from pathlib import Path
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 
-# إخفاء الوثائق الافتراضية
+# إخفاء واجهات التوثيق الافتراضية
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 BASE = Path(__file__).resolve().parent
 WORK = BASE / "work"
 WORK.mkdir(exist_ok=True)
 
-# الصفحة الرئيسية: يقرأ index.html من نفس المجلد
+# الحد الأقصى لحجم الفيديو (100MB)
+MAX_SIZE = 100 * 1024 * 1024  
+
 @app.get("/", response_class=HTMLResponse)
 def home():
     html_path = BASE / "index.html"
@@ -19,7 +21,7 @@ def home():
     return html_path.read_text(encoding="utf-8")
 
 def run_silent(cmd: list[str]) -> bool:
-    # تشغيل الأمر بصمت وإرجاع True/False فقط
+    """تشغيل ffmpeg بصمت"""
     try:
         p = subprocess.run(
             cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, text=False
@@ -29,17 +31,23 @@ def run_silent(cmd: list[str]) -> bool:
         return False
 
 @app.post("/process")
-def process(file: UploadFile = File(...)):
-    # حفظ الملف الوارد مؤقتًا
+async def process(file: UploadFile = File(...)):
+    # تحقق من حجم الملف
+    contents = await file.read()
+    if len(contents) > MAX_SIZE:
+        raise HTTPException(status_code=400, detail="⚠️ الملف أكبر من 100MB")
+    await file.seek(0)  # إعادة المؤشر للبداية بعد القراءة
+
     uid = uuid.uuid4().hex
     in_path  = WORK / f"in_{uid}.mp4"
     out_path = WORK / f"out_{uid}.mp4"
 
     try:
+        # حفظ الملف المؤقت
         with open(in_path, "wb") as f:
             shutil.copyfileobj(file.file, f)
 
-        # معالجة الفيديو (التفاصيل مخفية ولا تُعاد للمستخدم)
+        # معالجة الفيديو
         ok = run_silent([
             "ffmpeg", "-y",
             "-itsscale", "2",
@@ -51,15 +59,15 @@ def process(file: UploadFile = File(...)):
         ])
 
         if not ok or not out_path.exists():
-            # رسالة عامة فقط بدون أي تفاصيل
             return JSONResponse({"error": "تعذر إتمام المعالجة، حاول مجددًا."}, status_code=500)
 
-        # إعادة الملف الناتج للتنزيل
+        # إرجاع الملف الناتج للتنزيل
         headers = {"Content-Disposition": 'attachment; filename="output.mp4"'}
         return FileResponse(str(out_path), media_type="video/mp4", headers=headers)
 
     finally:
-        # تنظيف الإدخال دائمًا
-        try: os.remove(in_path)
-        except: pass
-        # ملاحظة: بإمكانك تنظيف ملفات الإخراج لاحقًا عبر مهمة مجدولة إذا رغبت
+        # تنظيف ملف الإدخال
+        try:
+            os.remove(in_path)
+        except:
+            pass

@@ -62,7 +62,7 @@ async def process(file: UploadFile = File(...)):
             return JSONResponse({"error": "تعذر إتمام المعالجة، حاول مجددًا."}, status_code=500)
 
         # إرجاع الملف الناتج للتنزيل
-        headers = {"Content-Disposition": 'attachment; filename="output.mp4"'}
+        headers = {"Content-Disposition": 'attachment; filename="4tik.mp4"'}
         return FileResponse(str(out_path), media_type="video/mp4", headers=headers)
 
     finally:

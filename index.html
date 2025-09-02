@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf--8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>4Tik Pro</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -127,7 +127,7 @@
     .card-title {
       font-size: 24px;
       font-weight: 800;
-      margin-top:0; margin-bottom: 8px;
+      margin-top:0; margin-bottom: 16px; /* Increased margin-bottom */
       background: linear-gradient(90deg, var(--c1), var(--c2));
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
@@ -143,6 +143,7 @@
       text-align: start;
       padding-inline-start: 25px;
       max-width: 100%;
+      margin-bottom: 20px; /* Added margin-bottom */
     }
     .how-to-section li {
       margin-bottom: 12px;
@@ -374,7 +375,7 @@
     /* ===== Rating Card Styles ===== */
     /* From Uiverse.io by vinodjangid07 */ 
     .rating-card {
-      width: 280px;
+      width: 320px; /* MODIFIED: Increased from 280px */
       height: fit-content;
       display: flex;
       flex-direction: column;
@@ -504,29 +505,24 @@
     <section id="how-to-card" class="card text-section how-to-section animated-entry">
       <div class="card-inner-content">
         <h2 class="card-title">كيفية الاستخدام</h2>
-        <p class="card-text">ارفع مقطع فيديو لا يقل عن دقيقتين. لأفضل النتائج، استخدم دقة 1080x1920 (مناسبة لتيك توك) وبمعدل 60 إطارًا في الثانية.</p>
         <ol>
-          <li>بعد انتهاء المعالجة، قم بتحميل المقطع الجديد على جهازك.</li>
-          <li>افتح متصفح الإنترنت  واذهب لموقع تيك توك.</li>
-          <li>ارفع المقطع المُحسَّن، واضبط إعدادات الخصوصية على "خاص".</li>
-          <li>بعد أن ينتهي تيك توك من معالجته، يمكنك تغيير الخصوصية إلى "عام" لنشره.</li>
+          <li>ارفع الفديو لايقل عن 100 ميقا.</li>
+          <li>اضغط على زر معالجة ليتم تحسين الفديو.</li>
+          <li>بعد اكتمال المعالجة حمل الفديو.</li>
+          <li>افتح تطبيق Tiktok قم بنشر المقطع واجعله خاص ليس للعام.</li>
+          <li>بعد الانتهاء من الرفع يمكنك الان تغييره للعامة.</li>
         </ol>
-        <p class="card-text">نأمل أن تنال هذه الطريقة رضاكم وأن تساهم في حل مشكلة جودة المقاطع.</p>
+        <p class="card-text">اتمنى ان يكون الموقع سهل الاستخدام ودعمكم لي يجعلني استمر ❤️</p>
       </div>
     </section>
-
     <section id="about-me-card" class="card text-section animated-entry">
       <div class="card-inner-content">
         <h2 class="card-title">عني</h2>
         <p class="card-text">تم بحمد الله تلبية طلب العديد من المتابعين بصنع أداة تحسن جودة المقاطع ولا تتطلب أي أجهزة معقدة مثل الكمبيوتر. الآن بإمكانك من أي جهاز رفع مقاطعك بجودة ممتازة دون مشاكل. مع تحيات، ملكة التطوير والبرمجة، منال.</p>
         <div class="social-icons">
-          <a href="https://www.tiktok.com/@queen_iy" target="_blank" rel="noopener noreferrer" aria-label="TikTok Profile">
-            <svg viewBox="0 0 448 512"><path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 122.8 122.8V209.9z"/></svg>
-          </a>
-        </div>
+          </div>
       </div>
     </section>
-
     <div id="rating-card" class="rating-card animated-entry">
       <div class="text-wrapper">
         <p class="text-primary">يرجى تقييم تجربتك</p>
@@ -677,3 +673,4 @@
   </script>
 </body>
 </html>
+

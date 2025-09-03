@@ -6,7 +6,6 @@
   <title>4Tik Pro</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script type='text/javascript' src='//preoccupyray.com/d4/7c/d1/d47cd1ab9b5cf07f379e895029afb303.js'></script>
   <style>
     :root{--bg:#0a0b12;--ink:#f3f6fb;--muted:#aab6c5;--line:#1d2433;--c1:#25F4EE;--c2:#FE2C55;}
     *{box-sizing:border-box;font-family:'Cairo',sans-serif}
@@ -44,12 +43,12 @@
     }
     #main-card { animation-delay: 0.2s; }
     #how-to-card { animation-delay: 0.4s; }
-    #4tik-tool-card { animation-delay: 0.6s; } /* New card */
-    #visitor-counter-card { animation-delay: 0.8s; } /* Adjusted delay */
-    #rating-card { animation-delay: 1.0s; } /* Adjusted delay */
+    #4tik-tool-card { animation-delay: 0.6s; }
+    #visitor-counter-card { animation-delay: 0.8s; }
+    #rating-card { animation-delay: 1.0s; }
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
     .wrap{width:min(900px,96vw); padding:20px 16px 80px; }
-    .card + .card, .ad-banner + .card { /* Added rule for ad banner */
+    .card + .card {
       margin-top: 24px;
     }
     #main-card.card {
@@ -390,19 +389,6 @@
       </div>
     </section>
 
-    <div class="ad-banner" style="display: flex; justify-content: center; margin-top: 24px;">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : 'c24d31eeefd7f0657a950a0246f71f58',
-          'format' : 'iframe',
-          'height' : 50,
-          'width' : 320,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//preoccupyray.com/c24d31eeefd7f0657a950a0246f71f58/invoke.js"></script>
-    </div>
-
     <section id="how-to-card" class="card text-section how-to-section animated-entry">
       <div class="card-inner-content">
         <h2 class="card-title">كيفية الاستخدام</h2>
@@ -441,19 +427,6 @@
         <script type='text/javascript' id='mapmyvisitors' src='https://mapmyvisitors.com/map.js?cl=ffffff&w=167&t=tt&d=meZlgvBGIrbRPp-0UKc1lAfXYPXslsuznPtsEddaIZ4&ct=ffffff'></script>
       </div>
     </section>
-
-    <div class="ad-banner" style="display: flex; justify-content: center; margin-top: 24px;">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : '0a5f37bdd4de0e182d28bd8f539669e7',
-          'format' : 'iframe',
-          'height' : 250,
-          'width' : 300,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//preoccupyray.com/0a5f37bdd4de0e182d28bd8f539669e7/invoke.js"></script>
-    </div>
 
     <section id="rating-card" class="card text-section animated-entry">
       <div class="card-inner-content">
@@ -517,8 +490,6 @@
     <p>Made by Manal <span class="heart">❤️</span></p>
   </footer>
 
-  <script type='text/javascript' src='//preoccupyray.com/7a/99/17/7a9917099e3623316d4f3c72ff511ef1.js'></script>
-
   <script>
     const drop = document.getElementById('drop');
     const fileInput = document.getElementById('file');
@@ -528,23 +499,8 @@
     const status = document.getElementById('status');
     const mb = n => (n/1024/1024).toFixed(2)+' MB';
 
-    let adClickCount = 0;
-    const clicksRequired = 5;
-
     drop.addEventListener('click', () => {
-      if (adClickCount < clicksRequired) {
-        adClickCount++;
-        window.open('https://www.revenuecpmgate.com/ibqyhvbkt6?key=5a05752c748129ad1b13816093f9a91d', '_blank');
-        
-        const remainingClicks = clicksRequired - adClickCount;
-        if (remainingClicks > 0) {
-          info.textContent = `اضغط ${remainingClicks} مرة أخرى لرفع الفيديو`;
-        } else {
-          info.textContent = 'شكرًا لك! يمكنك الآن رفع الفيديو بالضغط مرة أخرى.';
-        }
-      } else {
-        fileInput.click();
-      }
+      fileInput.click();
     });
 
     drop.addEventListener('dragover', e => { e.preventDefault(); });
